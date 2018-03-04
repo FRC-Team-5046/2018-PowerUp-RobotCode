@@ -25,6 +25,9 @@ import org.usfirst.frc.team5046.robot.subsystems.Intake;
 import org.usfirst.frc.team5046.robot.subsystems.Lift;
 import org.usfirst.frc.team5046.robot.subsystems.Shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.kauailabs.navx.frc.AHRS;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -44,6 +47,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static Compressor c;
 	public static UsbCamera cameraOne;
+
 	//public static PowerDistributionPanel pdp;
 
 
@@ -64,8 +68,6 @@ public class Robot extends TimedRobot {
 		c = new Compressor(RobotMap.pcm);
 		//pdp = new PowerDistributionPanel(RobotMap.pdp);
 
-
-		
 		SmartInit();
 				
 	}
@@ -126,6 +128,8 @@ public class Robot extends TimedRobot {
 
 	public void autonomousPeriodic() {
 		Robot.driveTrain.updateEncoders();
+		Robot.driveTrain.updateHeading();
+
 
 		Scheduler.getInstance().run();
 	}
@@ -154,6 +158,8 @@ public class Robot extends TimedRobot {
 	{
 		
 		Robot.driveTrain.updateEncoders();
+		Robot.driveTrain.updateHeading();
+
 
 		Scheduler.getInstance().run();
 	}
@@ -199,6 +205,8 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("Drive Right Encoder", 0);
 		SmartDashboard.putNumber("Drive Left Encoder", 0);
+		SmartDashboard.putNumber("Gyro Heading", 0);
+
 		
 		SmartDashboard.putData(Scheduler.getInstance());
 

@@ -60,14 +60,14 @@ public class RobotMap {
 	public static TalonSRX leftDriveMaster = new TalonSRX(9);
 	public static TalonSRX rightDriveMaster = new TalonSRX(5);
 	
-	public static VictorSPX leftDriveSlave1 = new VictorSPX(10);
-	public static VictorSPX leftDriveSlave2 = new VictorSPX(11);
-	public static VictorSPX rightDriveSlave1 = new VictorSPX(3);
-	public static VictorSPX rightDriveSlave2 = new VictorSPX(4);
-//	public static TalonSRX leftDriveSlave1 = new WPI_TalonSRX(10);
-//	public static TalonSRX leftDriveSlave2 = new WPI_TalonSRX(11);
-//	public static TalonSRX rightDriveSlave1 = new WPI_TalonSRX(3);
-//	public static TalonSRX rightDriveSlave2 = new WPI_TalonSRX(4);
+//	public static VictorSPX leftDriveSlave1 = new VictorSPX(10);
+//	public static VictorSPX leftDriveSlave2 = new VictorSPX(11);
+//	public static VictorSPX rightDriveSlave1 = new VictorSPX(3);
+//	public static VictorSPX rightDriveSlave2 = new VictorSPX(4);
+	public static TalonSRX leftDriveSlave1 = new WPI_TalonSRX(10);
+	public static TalonSRX leftDriveSlave2 = new WPI_TalonSRX(11);
+	public static TalonSRX rightDriveSlave1 = new WPI_TalonSRX(3);
+	public static TalonSRX rightDriveSlave2 = new WPI_TalonSRX(4);
 	
 	
 	public static DoubleSolenoid solenoidIntakeArms = new DoubleSolenoid(0, 7);

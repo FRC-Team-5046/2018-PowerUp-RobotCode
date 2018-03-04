@@ -8,8 +8,11 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,6 +25,8 @@ public final class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
 	
+	private AHRS ahrs;
+
 	private Drive drive;
 
 	private int maxLoopNumber = 0;
@@ -32,7 +37,30 @@ public final class DriveTrain extends Subsystem {
 	public DriveTrain() 
 	{
 		
+		try {
+			/***********************************************************************
+			 * navX-MXP:
+			 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
+			 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+			 * 
+			 * navX-Micro:
+			 * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
+			 * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
+			 * 
+			 * Multiple navX-model devices on a single robot are supported.
+			 ************************************************************************/
+            ahrs = new AHRS(SerialPort.Port.kUSB);
+        } catch (RuntimeException ex ) {
+            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+        }	
+		
     setFollower();
+    
+    RobotMap.leftDriveSlave1.follow(RobotMap.leftDriveMaster);
+   	RobotMap.leftDriveSlave2.follow(RobotMap.leftDriveMaster);
+   	
+   	RobotMap.rightDriveSlave1.follow(RobotMap.rightDriveMaster);
+   	RobotMap.rightDriveSlave2.follow(RobotMap.rightDriveMaster);
 	
 	RobotMap.leftDriveMaster.configNominalOutputForward(0, 10);
 	RobotMap.leftDriveMaster.configNominalOutputReverse(0, 10);
@@ -241,6 +269,20 @@ public final class DriveTrain extends Subsystem {
 	
 	}
 	
+	public double getHeading() {
+		return ahrs.getAngle();
+	}
+	
+	public void zeroGyro() {
+		ahrs.reset();
+		
+	}
+	
+	
+	
+	public void updateHeading() {
+		SmartDashboard.putNumber("Gyro Heading", this.getHeading());
+	}
 	
     public void initDefaultCommand() {
    	
