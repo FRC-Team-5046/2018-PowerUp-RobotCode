@@ -55,8 +55,8 @@ public class RobotMap {
 	public static boolean rightDriveInverted = false;
 
 	
-	public static TalonSRX leftDriveMaster = new WPI_TalonSRX(9);
-	public static TalonSRX rightDriveMaster = new WPI_TalonSRX(5);
+	public static TalonSRX leftDriveMaster = new TalonSRX(9);
+	public static TalonSRX rightDriveMaster = new TalonSRX(5);
 	
 	public static VictorSPX leftDriveSlave1 = new VictorSPX(10);
 	public static VictorSPX leftDriveSlave2 = new VictorSPX(11);

@@ -150,6 +150,7 @@ public final class DriveTrain extends Subsystem {
 	
 	public void setSetpointDrive(double setpointinches)
 	{
+		System.out.println("Target "+inchToEncoder(setpointinches));
 		RobotMap.leftDriveMaster.set(ControlMode.Position,
 				inchToEncoder(setpointinches));
 		RobotMap.rightDriveMaster.set(ControlMode.Position, 
@@ -178,11 +179,14 @@ public final class DriveTrain extends Subsystem {
 
 		// set tolerance in ticks
 		allowedErrorRange = ticks;
+		
+		this.maxLoopNumber=maxLoopNumber;
+
 	}
 		
 	public double inchToEncoder(double inches)
 	{
-		System.out.println((inches / RobotMap.wheelCir) * 4096);
+		System.out.println("inchtoencoder: "+(inches / RobotMap.wheelCir) * 4096);
 		return (inches / RobotMap.wheelCir) * 4096;
 	}
 	

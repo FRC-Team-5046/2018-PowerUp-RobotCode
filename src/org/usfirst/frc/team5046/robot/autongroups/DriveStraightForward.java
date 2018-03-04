@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
+import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,5 +26,6 @@ public class DriveStraightForward extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential(new AutonDriveCommand(100,10));
     }
 }

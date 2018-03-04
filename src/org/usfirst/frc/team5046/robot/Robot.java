@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static Compressor c;
 	public static UsbCamera cameraOne;
-	public static PowerDistributionPanel pdp;
+	//public static PowerDistributionPanel pdp;
 
 
 	Command autonMode;
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 	{
 		oi = new OI();
 		c = new Compressor(RobotMap.pcm);
-		pdp = new PowerDistributionPanel(RobotMap.pdp);
+		//pdp = new PowerDistributionPanel(RobotMap.pdp);
 
 
 		
@@ -194,7 +194,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("turnD", RobotMap.turnD);
 		SmartDashboard.putNumber("turnF", RobotMap.turnF);
 		
-		SmartDashboard.putData("PDP", pdp);
+		//SmartDashboard.putData("PDP", pdp);
 		
 		SmartDashboard.putNumber("Drive Right Encoder", 0);
 		SmartDashboard.putNumber("Drive Left Encoder", 0);

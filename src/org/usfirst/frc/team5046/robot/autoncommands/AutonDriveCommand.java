@@ -31,9 +31,9 @@ public class AutonDriveCommand extends Command
 
 		Robot.driveTrain.setPID(
 				SmartDashboard.getNumber("driveP", RobotMap.driveP),
-				SmartDashboard.getNumber("DriveI", RobotMap.driveI),
-				SmartDashboard.getNumber("DriveD", RobotMap.driveD),
-				SmartDashboard.getNumber("DriveF", RobotMap.driveF));
+				SmartDashboard.getNumber("driveI", RobotMap.driveI),
+				SmartDashboard.getNumber("driveD", RobotMap.driveD),
+				SmartDashboard.getNumber("driveF", RobotMap.driveF));
 
 		Robot.driveTrain.setSetpointDrive(inches);
 
