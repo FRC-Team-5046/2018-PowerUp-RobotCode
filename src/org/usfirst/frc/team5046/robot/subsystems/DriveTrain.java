@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -187,7 +188,7 @@ public final class DriveTrain extends Subsystem {
 	public double inchToEncoder(double inches)
 	{
 		System.out.println("inchtoencoder: "+(inches / RobotMap.wheelCir) * 4096);
-		return (inches / RobotMap.wheelCir) * 4096;
+		return (inches / RobotMap.wheelCir) * 5000;
 	}
 	
 	public double degreesToEncoder(double degrees)
@@ -229,6 +230,17 @@ public final class DriveTrain extends Subsystem {
 	{
 		drive.driveArcade(throttle, wheel);
 	}
+	
+	public void shiftLow() {
+    	RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kForward);	
+	}
+	
+	// set drive train shifters to high gear
+	public void shiftHigh() {
+		RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kReverse);
+	
+	}
+	
 	
     public void initDefaultCommand() {
    	

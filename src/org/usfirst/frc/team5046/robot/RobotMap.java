@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -67,5 +69,10 @@ public class RobotMap {
 //	public static TalonSRX rightDriveSlave1 = new WPI_TalonSRX(3);
 //	public static TalonSRX rightDriveSlave2 = new WPI_TalonSRX(4);
 	
+	
+	public static DoubleSolenoid solenoidIntakeArms = new DoubleSolenoid(0, 7);
+	public static DoubleSolenoid solenoidUpperLift = new DoubleSolenoid(2, 5);
+	public static DoubleSolenoid solenoidDriveShifters = new DoubleSolenoid(1, 6);
+
 	
 }

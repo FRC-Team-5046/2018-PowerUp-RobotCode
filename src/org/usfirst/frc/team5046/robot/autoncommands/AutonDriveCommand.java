@@ -28,6 +28,8 @@ public class AutonDriveCommand extends Command
 	protected void initialize()
 	{
 		Robot.driveTrain.zeroEncoders();
+		
+		Robot.driveTrain.shiftLow();
 
 		Robot.driveTrain.setPID(
 				SmartDashboard.getNumber("driveP", RobotMap.driveP),
