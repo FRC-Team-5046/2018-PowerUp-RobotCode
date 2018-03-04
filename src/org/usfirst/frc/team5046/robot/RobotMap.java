@@ -48,7 +48,7 @@ public class RobotMap {
 	public static double turnF = 0.0;
 	
 	public static final double wheelCir = 18.84;
-	public static final double robotCir = 103.62;
+	public static final double robotCir = 100;  //81.68
 
 
 	public static boolean leftDriveSensorPhase = false;

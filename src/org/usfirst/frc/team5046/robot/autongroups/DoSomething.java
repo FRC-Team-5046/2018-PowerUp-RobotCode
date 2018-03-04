@@ -1,16 +1,16 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
+import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnGyroCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Turn90 extends CommandGroup {
+public class DoSomething extends CommandGroup {
 
-    public Turn90() {
+    public DoSomething() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,6 +27,17 @@ public class Turn90 extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonTurnGyroCommand(90,10));
+    	addSequential(new AutonDriveCommand(50,10));
+    	addSequential(new AutonTurnEncoderCommand(90,10));
+    	
+    	addSequential(new AutonDriveCommand(50,10));
+    	addSequential(new AutonTurnEncoderCommand(90,10));
+    	
+    	addSequential(new AutonDriveCommand(50,10));
+    	addSequential(new AutonTurnEncoderCommand(90,10));
+    	
+    	addSequential(new AutonDriveCommand(50,10));
+    	addSequential(new AutonTurnEncoderCommand(90,10));
+    	
     }
 }

@@ -189,6 +189,7 @@ public final class DriveTrain extends Subsystem {
 	public void setSetpointTurn(double setpointdegrees)
 	{
 		zeroEncoders();
+		zeroGyro();
 
 		System.out.println("setpoint: " + degreesToEncoder(setpointdegrees));
 
@@ -215,7 +216,7 @@ public final class DriveTrain extends Subsystem {
 		
 	public double inchToEncoder(double inches)
 	{
-		System.out.println("inchtoencoder: "+(inches / RobotMap.wheelCir) * 4096);
+		System.out.println("inchtoencoder: "+(inches / RobotMap.wheelCir) * 5000);
 		return (inches / RobotMap.wheelCir) * 5000;
 	}
 	
