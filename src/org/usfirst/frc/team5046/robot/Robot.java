@@ -18,6 +18,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 
 import org.usfirst.frc.team5046.robot.autongroups.DriveStraightForward;
+import org.usfirst.frc.team5046.robot.autongroups.Turn90;
 import org.usfirst.frc.team5046.robot.subsystems.Conveyor;
 import org.usfirst.frc.team5046.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5046.robot.subsystems.Intake;
@@ -167,7 +168,7 @@ public class Robot extends TimedRobot {
 	public void SmartInit() {
 		
 		autonChooser.addObject("DriveStraightForward", new DriveStraightForward());
-
+		autonChooser.addObject("Turn 90", new Turn90());
 		
 		positionChooser.addObject("Left", null);
 		positionChooser.addDefault("Middle", null);

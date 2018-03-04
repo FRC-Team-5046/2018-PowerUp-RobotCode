@@ -165,8 +165,8 @@ public final class DriveTrain extends Subsystem {
 		System.out.println("setpoint: " + degreesToEncoder(setpointdegrees));
 
 		RobotMap.leftDriveMaster.set(ControlMode.Position,
-				degreesToEncoder(setpointdegrees));
-		RobotMap.leftDriveMaster.set(ControlMode.Position, 
+				degreesToEncoder(-setpointdegrees));
+		RobotMap.rightDriveMaster.set(ControlMode.Position, 
 				degreesToEncoder(setpointdegrees));
 	}
 	
