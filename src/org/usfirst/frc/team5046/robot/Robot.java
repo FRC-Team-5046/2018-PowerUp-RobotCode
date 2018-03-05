@@ -39,20 +39,21 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Robot extends TimedRobot {
 	
+	
+	//setup subsystems
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Lift lift = new Lift();
 	public static Conveyor conveyor = new Conveyor();
 	public static Intake intake = new Intake();
 	public static Shooter shooter = new Shooter();
 	
-	
+	//setup default systems
 	public static OI oi;
 	public static Compressor c;
 	public static UsbCamera cameraOne;
+	public static PowerDistributionPanel pdp;
 
-	//public static PowerDistributionPanel pdp;
-
-
+	//setup options for choosing auto from the dashboard
 	Command autonMode;
 	SendableChooser<Command> positionChooser = new SendableChooser<Command>();
 	SendableChooser<Command> allianceChooser = new SendableChooser<Command>();
@@ -66,15 +67,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() 
 	{
-		oi = new OI();
+		//start systems
+		oi = new OI(); 
 		c = new Compressor(RobotMap.pcm);
-		//pdp = new PowerDistributionPanel(RobotMap.pdp);
+		pdp = new PowerDistributionPanel(RobotMap.pdp);
 
+		//set motors on subsystems to proper direction so that postive is always forward
 		Robot.intake.setInverted();
 		Robot.conveyor.setInverted();
 		Robot.shooter.setInverted();
 
-
+		//initialize the dashboard with values
 		SmartInit();
 				
 	}
@@ -86,21 +89,23 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		c.start();
-		Scheduler.getInstance().run();
+		c.start(); //start compressor
+		Scheduler.getInstance().run(); //runs scheduler loop
 
 	}
 
 
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
+		Scheduler.getInstance().run();//runs scheduler loop
 	}
 
 	public void autonomousInit() {
-		Robot.driveTrain.zeroEncoders();
-		Robot.driveTrain.shiftLow();
+		Robot.driveTrain.zeroEncoders(); //zeros encoders at the start of auton
+		Robot.driveTrain.shiftLow(); //shifts into lowgear 
 
-		String gameData;
+		
+		//reads game data from field
+		String gameData; 
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 //		char gameDataOurSwitchSide;
 //		char gameDataOurScaleSide;
@@ -120,9 +125,9 @@ public class Robot extends TimedRobot {
 			// Put right auto code here
 		}
 		
-		SmartDashboard.putString("Robot Autonomous Data", gameData);
+		SmartDashboard.putString("Robot Autonomous Data", gameData);  //puts on dashboard to make sure that we are recieving it properly
 		
-		// schedule the autonomous command (example)
+		// schedule the autonomous command
 		autonMode = (Command) autonChooser.getSelected();
 		if (autonMode != null) 
 		{
@@ -135,6 +140,8 @@ public class Robot extends TimedRobot {
 	 */
 
 	public void autonomousPeriodic() {
+		
+		//these update the various subsection values to the dashboard
 		Robot.driveTrain.updateEncoders();
 		Robot.driveTrain.updateHeading();
 		Robot.intake.updateIntakeRunning();
@@ -143,16 +150,17 @@ public class Robot extends TimedRobot {
 		Robot.lift.updateLift();
 
 
-		Scheduler.getInstance().run();
+		Scheduler.getInstance().run(); //runs scheduler loop
 	}
 
 	
 	public void teleopInit() {
 		
 		
-		Robot.driveTrain.zeroEncoders();
-		Robot.driveTrain.shiftLow();
-		Robot.intake.armsOpen();
+		Robot.driveTrain.zeroEncoders(); //zero's encoders as we start telop
+		Robot.driveTrain.shiftLow(); //shifts the drive train into low
+		Robot.intake.armsOpen(); //opens the arms if they were not already opened in auton mode
+		
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -170,7 +178,7 @@ public class Robot extends TimedRobot {
 
 	public void teleopPeriodic()
 	{
-		
+		//these update the various subsection values to the dashboard
 		Robot.driveTrain.updateEncoders();
 		Robot.driveTrain.updateHeading();
 		Robot.intake.updateIntakeRunning();
@@ -181,7 +189,7 @@ public class Robot extends TimedRobot {
 		
 
 
-		Scheduler.getInstance().run();
+		Scheduler.getInstance().run();  //runs scheduler loop
 	}
 
 	/**
@@ -193,42 +201,51 @@ public class Robot extends TimedRobot {
 
 	public void SmartInit() {
 		
+		//These are the various autonmodes that can be choosen from on the smartdashboard, each runs a auton command group
 		autonChooser.addObject("DriveStraightForward", new DriveStraightBackwards());
 		autonChooser.addObject("Turn 90", new Turn90());
 		autonChooser.addObject("Turn 90 Gyro", new Turn90Gyro());
 		autonChooser.addObject("DoSomething", new DoSomething());
 		
+		//gives you the ability to choose which position on the field that you start in
 		positionChooser.addObject("Left", null);
 		positionChooser.addDefault("Middle", null);
 		positionChooser.addObject("Right", null);
 		
+		//lets you choose what alliance you are on(not really needed this year as the field is identical on both sides)
 		allianceChooser.addDefault("Red", null);
 		allianceChooser.addObject("Blue", null);
 		
+		//puts these values on the dashboard to make them useable
 		SmartDashboard.putData("Auton mode", autonChooser);
 		SmartDashboard.putData("Auton Position", positionChooser);
 		SmartDashboard.putData("Alliance", allianceChooser);
 		
 		
 
-		System.out.println("Settings");
+		//System.out.println("Settings"); 
 		
+		//puts the drivetrain PID values on the dashboard
 		SmartDashboard.putNumber("driveP", RobotMap.driveP);
 		SmartDashboard.putNumber("driveI", RobotMap.driveI);
 		SmartDashboard.putNumber("driveD", RobotMap.driveD);
 		SmartDashboard.putNumber("driveF", RobotMap.driveF);
-
+		
+		//puts the drivetrain turning(gyro) PID values on the dashboard
 		SmartDashboard.putNumber("turnP", RobotMap.turnP);
 		SmartDashboard.putNumber("turnI", RobotMap.turnI);
 		SmartDashboard.putNumber("turnD", RobotMap.turnD);
 		SmartDashboard.putNumber("turnF", RobotMap.turnF);
 		
-		//SmartDashboard.putData("PDP", pdp);
+		//puts PDP data on the dashboard so you can see if motors are running or not
+		SmartDashboard.putData("PDP", pdp);
 		
+		//setup encoders and gyro with a base value of 0 on dashboard
 		SmartDashboard.putNumber("Drive Right Encoder", 0);
 		SmartDashboard.putNumber("Drive Left Encoder", 0);
 		SmartDashboard.putNumber("Gyro Heading", 0);
 		
+		//setup initial values for data from the various subsystems
 		SmartDashboard.putString("Drive Train Gear" , "BEGIN");
 		SmartDashboard.putString("Intake Arms" , "BEGIN");
 		SmartDashboard.putNumber("Left Intake Motor", 0);
@@ -237,7 +254,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Conveyer Motor", 0);	
 
 		
-		SmartDashboard.putData(Scheduler.getInstance());
+		SmartDashboard.putData(Scheduler.getInstance());  //shows what is scheduled to run
 
 	}
 }

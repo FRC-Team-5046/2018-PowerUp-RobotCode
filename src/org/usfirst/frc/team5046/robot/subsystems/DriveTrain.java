@@ -25,11 +25,13 @@ public final class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
 	
-	private AHRS ahrs;
+	private AHRS ahrs; //setup NavX Gyro
 
-	private Drive drive;
+	private Drive drive; //setup DriveTrain
 
-	private int maxLoopNumber = 0;
+	
+	//setup variables needed for error checking
+	private int maxLoopNumber = 0;  
 	private int onTargetCounter = 0;
 	private int allowedErrorRange = 0;
 
@@ -37,31 +39,23 @@ public final class DriveTrain extends Subsystem {
 	public DriveTrain() 
 	{
 		
+		//Setup NavX using USB instead of the MXP port
 		try {
-			/***********************************************************************
-			 * navX-MXP:
-			 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
-			 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
-			 * 
-			 * navX-Micro:
-			 * - Communication via I2C (RoboRIO MXP or Onboard) and USB.
-			 * - See http://navx-micro.kauailabs.com/guidance/selecting-an-interface.
-			 * 
-			 * Multiple navX-model devices on a single robot are supported.
-			 ************************************************************************/
             ahrs = new AHRS(SerialPort.Port.kUSB);
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }	
 		
-    setFollower();
+    setFollower();  //runs code to setup the follower talons
     
-    RobotMap.leftDriveSlave1.follow(RobotMap.leftDriveMaster);
-   	RobotMap.leftDriveSlave2.follow(RobotMap.leftDriveMaster);
-   	
-   	RobotMap.rightDriveSlave1.follow(RobotMap.rightDriveMaster);
-   	RobotMap.rightDriveSlave2.follow(RobotMap.rightDriveMaster);
+    //this may be redundant put this back if its still needed
+    //RobotMap.leftDriveSlave1.follow(RobotMap.leftDriveMaster);
+   	//RobotMap.leftDriveSlave2.follow(RobotMap.leftDriveMaster);
+   	//RobotMap.rightDriveSlave1.follow(RobotMap.rightDriveMaster);
+   	//RobotMap.rightDriveSlave2.follow(RobotMap.rightDriveMaster);
 	
+   	
+   	//sets power levels on the talons(currently just using defaults)
 	RobotMap.leftDriveMaster.configNominalOutputForward(0, 10);
 	RobotMap.leftDriveMaster.configNominalOutputReverse(0, 10);
 	RobotMap.leftDriveMaster.configPeakOutputForward(1, 10);
@@ -71,21 +65,22 @@ public final class DriveTrain extends Subsystem {
 	RobotMap.rightDriveMaster.configPeakOutputForward(1, 10);
 	RobotMap.rightDriveMaster.configPeakOutputReverse(-1, 10);
 
-
+	//setup the master drivetrain talons to use Greyhill encoders
 	RobotMap.leftDriveMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
    	RobotMap.rightDriveMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 	
-   	clearStickyFaults(true);
-	setBrakeMode(true);
-	setInverted();
-	setSensorPhase(false,false);
+   	clearStickyFaults(true); //clears stickyfaults that may be left around on drive motors
+	setBrakeMode(true); //sets the drivetrain in brake mode(makes PID tuning easier since you won't coast and overshoot your target)
+	setInverted(); //inverts the drive train motors to the proper setting
+	setSensorPhase(false,false); //sets the phase of the encoders so that when a positive number is applied the encoders are reading a positive value
 
    
-	drive=new Drive(RobotMap.rightDriveMaster,RobotMap.leftDriveMaster);
+	drive=new Drive(RobotMap.rightDriveMaster,RobotMap.leftDriveMaster);  //builds the actual drive with the master talons
 
 	}
 	
 	
+	//This clears the sticky faults on the six drive train talons
 	public void clearStickyFaults(boolean shouldClearFaults) 
 	{
 		if (shouldClearFaults)
@@ -102,6 +97,7 @@ public final class DriveTrain extends Subsystem {
 		   	}
 	}
 	
+	//Enables Braking mode
 	public void setBrakeMode(boolean shouldBrakeMode)
 	{
 		if (shouldBrakeMode)
@@ -126,6 +122,7 @@ public final class DriveTrain extends Subsystem {
 		}
 	}
 	
+	//Setup which motors are followers and what they are following for the drive train
 	private void setFollower()
 	{
 		RobotMap.leftDriveSlave1.follow(RobotMap.leftDriveMaster);
@@ -135,6 +132,7 @@ public final class DriveTrain extends Subsystem {
 	   	RobotMap.rightDriveSlave2.follow(RobotMap.rightDriveMaster);
 	}
 	
+	//Setup the inversion of the motors
 	private void setInverted() {
 		
 		RobotMap.leftDriveMaster.setInverted(RobotMap.leftDriveInverted);
@@ -147,12 +145,14 @@ public final class DriveTrain extends Subsystem {
 	  
 	}
 
+	//Setup the sensor phase of the encoders
 	public void setSensorPhase(boolean leftphase, boolean rightphase)
 	{
 		RobotMap.leftDriveMaster.setSensorPhase(leftphase);
 	   	RobotMap.rightDriveMaster.setSensorPhase(rightphase);
 	}
 
+	//Zero's the encoders
 	public void zeroEncoders() {
 		RobotMap.leftDriveMaster.setSelectedSensorPosition(0, 0, 0);
 		RobotMap.rightDriveMaster.setSelectedSensorPosition(0, 0, 0);
@@ -163,6 +163,7 @@ public final class DriveTrain extends Subsystem {
 		
 	}
 	
+	//Sets the PID values on the talons
 	public void setPID(double P, double I, double D, double F) {
 
 		RobotMap.leftDriveMaster.config_kF(0, F, 10);
@@ -177,6 +178,7 @@ public final class DriveTrain extends Subsystem {
 
 	}
 	
+	//Sets the distance that you are trying to reach in inches
 	public void setSetpointDrive(double setpointinches)
 	{
 		System.out.println("Target "+inchToEncoder(setpointinches));
@@ -186,6 +188,7 @@ public final class DriveTrain extends Subsystem {
 				inchToEncoder(setpointinches));
 	}
 
+	//Sets the angle that you are trying to reach
 	public void setSetpointTurn(double setpointdegrees)
 	{
 		zeroEncoders();
@@ -199,6 +202,7 @@ public final class DriveTrain extends Subsystem {
 				degreesToEncoder(setpointdegrees));
 	}
 	
+	//This makes sure that your on target to hit your value
 	public void setupOnTarget(int ticks, int maxLoopNumber)
 	{
 		// zero the on target counter
@@ -213,18 +217,23 @@ public final class DriveTrain extends Subsystem {
 		this.maxLoopNumber=maxLoopNumber;
 
 	}
-		
+	
+	//converts inches to encoder pulses (needs to be tuned to the pulses of your encoder
 	public double inchToEncoder(double inches)
 	{
 		System.out.println("inchtoencoder: "+(inches / RobotMap.wheelCir) * 5000);
 		return (inches / RobotMap.wheelCir) * 5000;
 	}
 	
+	
+	//converts degrees to encoder pulses
 	public double degreesToEncoder(double degrees)
 	{
 		return inchToEncoder((RobotMap.robotCir / 360) * degrees);
 	}
 	
+	
+	//Makes sure you are within range of the values you set
 	public boolean onTarget()
 	{
 		if (Math.abs(RobotMap.leftDriveMaster.getClosedLoopError(0))
@@ -247,6 +256,7 @@ public final class DriveTrain extends Subsystem {
 		return false;
 	}
 
+	//Sends encoder data to the dashboard when requested
 	public void updateEncoders()
 	{
 		SmartDashboard.putNumber("Right Encoder", RobotMap.rightDriveMaster.getSelectedSensorPosition(0));
@@ -255,11 +265,13 @@ public final class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Left Enc VEL", RobotMap.leftDriveMaster.getSelectedSensorVelocity(0));
 	}
 	
+	//Actual method to drive the robot using a power(throttle) and wheel(rotation) as inputs
 	public void driveArcade(double throttle, double wheel)
 	{
 		drive.driveArcade(throttle, wheel);
 	}
 	
+	//set drive train shifters to low gear
 	public void shiftLow() {
     	RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kForward);	
 		SmartDashboard.putString("Drive Train Gear" , "LOW");
@@ -273,21 +285,23 @@ public final class DriveTrain extends Subsystem {
 	
 	}
 	
+	//gets the heading of the NavX gyro
 	public double getHeading() {
 		return ahrs.getAngle();
 	}
 	
+	//zeros the NavX gyro
 	public void zeroGyro() {
 		ahrs.reset();
 		
 	}
 	
-	
-	
+	//puts the Gyro heading on the dashboard
 	public void updateHeading() {
 		SmartDashboard.putNumber("Gyro Heading", this.getHeading());
 	}
 	
+	//sets the default command to drive the robot by joystick
     public void initDefaultCommand() {
    	
 		setDefaultCommand(new DriveCommand());
