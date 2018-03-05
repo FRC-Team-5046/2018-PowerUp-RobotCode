@@ -70,6 +70,11 @@ public class Robot extends TimedRobot {
 		c = new Compressor(RobotMap.pcm);
 		//pdp = new PowerDistributionPanel(RobotMap.pdp);
 
+		Robot.intake.setInverted();
+		Robot.conveyor.setInverted();
+		Robot.shooter.setInverted();
+
+
 		SmartInit();
 				
 	}
@@ -93,6 +98,7 @@ public class Robot extends TimedRobot {
 
 	public void autonomousInit() {
 		Robot.driveTrain.zeroEncoders();
+		Robot.driveTrain.shiftLow();
 
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -131,6 +137,10 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Robot.driveTrain.updateEncoders();
 		Robot.driveTrain.updateHeading();
+		Robot.intake.updateIntakeRunning();
+		Robot.conveyor.updateConveyerRunning();
+		Robot.shooter.updateShooterRunning();
+		Robot.lift.updateLift();
 
 
 		Scheduler.getInstance().run();
@@ -141,7 +151,9 @@ public class Robot extends TimedRobot {
 		
 		
 		Robot.driveTrain.zeroEncoders();
-
+		Robot.driveTrain.shiftLow();
+		Robot.intake.armsOpen();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -161,6 +173,12 @@ public class Robot extends TimedRobot {
 		
 		Robot.driveTrain.updateEncoders();
 		Robot.driveTrain.updateHeading();
+		Robot.intake.updateIntakeRunning();
+		Robot.conveyor.updateConveyerRunning();
+		Robot.shooter.updateShooterRunning();
+		Robot.lift.updateLift();
+
+		
 
 
 		Scheduler.getInstance().run();
@@ -210,6 +228,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Drive Right Encoder", 0);
 		SmartDashboard.putNumber("Drive Left Encoder", 0);
 		SmartDashboard.putNumber("Gyro Heading", 0);
+		
+		SmartDashboard.putString("Drive Train Gear" , "BEGIN");
+		SmartDashboard.putString("Intake Arms" , "BEGIN");
+		SmartDashboard.putNumber("Left Intake Motor", 0);
+		SmartDashboard.putNumber("Right Intake Motor", 0);
+		SmartDashboard.putNumber("Left Conveyer Motor", 0);
+		SmartDashboard.putNumber("Right Conveyer Motor", 0);	
 
 		
 		SmartDashboard.putData(Scheduler.getInstance());

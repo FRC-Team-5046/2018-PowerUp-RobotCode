@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Talon;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -74,5 +75,35 @@ public class RobotMap {
 	public static DoubleSolenoid solenoidUpperLift = new DoubleSolenoid(2, 5);
 	public static DoubleSolenoid solenoidDriveShifters = new DoubleSolenoid(1, 6);
 
+	public static TalonSRX leftIntake = new TalonSRX(13); 		/* device IDs here (1 of 2) */
+	public static TalonSRX rightIntake = new TalonSRX(1);
+
+	public static boolean leftIntakeInverted = true;
+	public static boolean rightIntakeInverted = false;
+	
+	public static TalonSRX leftConveyer = new TalonSRX(12);
+	public static TalonSRX rightConveyer = new TalonSRX(2);
+
+	
+	public static boolean leftConveyerInverted = true;
+	public static boolean rightConveyerInverted = false;
+
+	
+	//public static TalonSRX leftShooter = new TalonSRX(7); 		/* device IDs here (1 of 2) */
+	//public static TalonSRX rightShooter = new TalonSRX(6);
+	public static Talon rightShooter = new Talon(1);
+	public static Talon leftShooter = new Talon(0);
+
+
+
+	public static boolean leftShooterInverted = true;
+	public static boolean rightShooterInverted = false;
+	
+	public static TalonSRX liftMotor = new TalonSRX(8);
+	public static boolean liftMotorInverted = true;
+	
+	public static boolean compBot = false;
+
+	
 	
 }

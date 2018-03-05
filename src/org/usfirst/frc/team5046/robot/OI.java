@@ -8,6 +8,14 @@
 package org.usfirst.frc.team5046.robot;
 
 import org.usfirst.frc.team5046.robot.RobotMap;
+import org.usfirst.frc.team5046.robot.commandgroups.PickupCube;
+import org.usfirst.frc.team5046.robot.commandgroups.SpitCubeOut;
+import org.usfirst.frc.team5046.robot.commands.ConveyorHighSpeed;
+import org.usfirst.frc.team5046.robot.commands.DriveShiftToggle;
+import org.usfirst.frc.team5046.robot.commands.IntakeArmsToggle;
+import org.usfirst.frc.team5046.robot.commands.LowerLift;
+import org.usfirst.frc.team5046.robot.commands.RaiseLift;
+import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
 import org.usfirst.frc.team5046.robot.utilities.LogitechF310;
 
 /**
@@ -48,7 +56,22 @@ public class OI {
 	
 	public OI()
 	{
+		one.buttonL1.toggleWhenPressed(new DriveShiftToggle());
+		one.buttonR1.whileHeld(new IntakeArmsToggle());
+		one.buttonTL.whileHeld(new ShooterHighSpeed());
 		
+		two.buttonL1.whileHeld(new PickupCube());
+		two.buttonR1.whileHeld(new SpitCubeOut());
+		
+		two.buttonTL.whileHeld(new RaiseLift(5));
+		two.buttonTR.whileHeld(new LowerLift(5));
+		two.buttonA.whileHeld(new ShooterHighSpeed());
+		
+		
+		
+		
+		
+
 	}
 	
 }

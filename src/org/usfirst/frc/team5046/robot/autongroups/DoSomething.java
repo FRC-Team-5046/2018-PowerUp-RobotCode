@@ -2,6 +2,8 @@ package org.usfirst.frc.team5046.robot.autongroups;
 
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
+import org.usfirst.frc.team5046.robot.commands.RaiseLift;
+import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -28,16 +30,10 @@ public class DoSomething extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new AutonDriveCommand(50,10));
-    	addSequential(new AutonTurnEncoderCommand(90,10));
     	
-    	addSequential(new AutonDriveCommand(50,10));
-    	addSequential(new AutonTurnEncoderCommand(90,10));
+      	addSequential(new RaiseLift(5));
+    	addSequential(new ShooterHighSpeed());
     	
-    	addSequential(new AutonDriveCommand(50,10));
-    	addSequential(new AutonTurnEncoderCommand(90,10));
-    	
-    	addSequential(new AutonDriveCommand(50,10));
-    	addSequential(new AutonTurnEncoderCommand(90,10));
     	
     }
 }
