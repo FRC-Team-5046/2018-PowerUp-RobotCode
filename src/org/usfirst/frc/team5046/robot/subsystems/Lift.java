@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5046.robot.subsystems;
 
 import org.usfirst.frc.team5046.robot.RobotMap;
-import org.usfirst.frc.team5046.robot.commands.RaiseLift;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 

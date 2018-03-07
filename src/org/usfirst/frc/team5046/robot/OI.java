@@ -10,7 +10,6 @@ package org.usfirst.frc.team5046.robot;
 import org.usfirst.frc.team5046.robot.RobotMap;
 import org.usfirst.frc.team5046.robot.commandgroups.PickupCube;
 import org.usfirst.frc.team5046.robot.commandgroups.SpitCubeOut;
-import org.usfirst.frc.team5046.robot.commands.ConveyorHighSpeed;
 import org.usfirst.frc.team5046.robot.commands.DriveShiftToggle;
 import org.usfirst.frc.team5046.robot.commands.IntakeArmsToggle;
 import org.usfirst.frc.team5046.robot.commands.LowerLift;

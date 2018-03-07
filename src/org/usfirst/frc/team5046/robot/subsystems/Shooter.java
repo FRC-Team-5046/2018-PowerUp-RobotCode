@@ -2,10 +2,8 @@ package org.usfirst.frc.team5046.robot.subsystems;
 
 import org.usfirst.frc.team5046.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *

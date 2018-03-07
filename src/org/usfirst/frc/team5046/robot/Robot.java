@@ -27,9 +27,6 @@ import org.usfirst.frc.team5046.robot.subsystems.Intake;
 import org.usfirst.frc.team5046.robot.subsystems.Lift;
 import org.usfirst.frc.team5046.robot.subsystems.Shooter;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.kauailabs.navx.frc.AHRS;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot

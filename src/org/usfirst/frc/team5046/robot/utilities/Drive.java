@@ -53,7 +53,7 @@ public final class Drive
 		moveValue = limitValue(moveValue);
 		rotateValue = limitValue(rotateValue);
 
-		double maxInput = Math.copySign(Math.max(Math.abs(moveValue), Math.abs(rotateValue)), moveValue);
+//		double maxInput = Math.copySign(Math.max(Math.abs(moveValue), Math.abs(rotateValue)), moveValue);
 		
 		if (moveValue >= 0.0)
 		{

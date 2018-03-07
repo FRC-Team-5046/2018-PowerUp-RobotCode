@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnGyroCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

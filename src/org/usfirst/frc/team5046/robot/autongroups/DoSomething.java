@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
 import org.usfirst.frc.team5046.robot.commands.RaiseLift;
 import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
 
