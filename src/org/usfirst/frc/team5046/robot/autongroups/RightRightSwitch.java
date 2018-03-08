@@ -1,15 +1,22 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
+import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
+import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
+import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnGyroCommand;
+import org.usfirst.frc.team5046.robot.commands.RaiseLift;
+import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
+import org.usfirst.frc.team5046.robot.commands.ShooterReverse;
+import org.usfirst.frc.team5046.robot.commands.ShooterStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Turn90Gyro extends CommandGroup {
+public class RightRightSwitch extends CommandGroup {
 
-    public Turn90Gyro() {
+    public RightRightSwitch() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -26,6 +33,20 @@ public class Turn90Gyro extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonTurnEncoderCommand(90,10));
+    	
+
+    	
+    	//RIGHT RIGHT SWITCH
+    	addSequential(new AutonDriveCommand(-150,2));
+    	addSequential(new AutonTurnEncoderCommand(90,2));
+    	addSequential(new AutonDriveCommand(-30,2));
+    	addSequential(new ShooterHighSpeed());
+    	addSequential(new ShooterStop());
+
+    	
+
+
+
+    	
     }
 }

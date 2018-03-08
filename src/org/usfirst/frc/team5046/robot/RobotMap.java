@@ -37,14 +37,14 @@ public class RobotMap {
 	public static double driveF = 0.0;
 
 	//setup PIDF values for Drivetrain when turning with Gyro
-	public static double turnP = .2;
+	public static double turnP = .3;
 	public static double turnI = 0.0;
 	public static double turnD = 0.0;
 	public static double turnF = 0.0;
 	
 	
 	public static final double wheelCir = 18.84; //Set wheel circumfrence for 6in wheels
-	public static final double robotCir = 81.88;  //Set circumfrence of the robot
+	public static final double robotCir = 100;  //Set circumfrence of the robot
 
 	
 	//sets the sensor phase of the drivetrain motors
@@ -61,14 +61,14 @@ public class RobotMap {
 	
 	
 	//these are the follower talons or victors in the drivetrain depending on the robot we are using
-//	public static VictorSPX leftDriveSlave1 = new VictorSPX(10);
-//	public static VictorSPX leftDriveSlave2 = new VictorSPX(11);
-//	public static VictorSPX rightDriveSlave1 = new VictorSPX(3);
-//	public static VictorSPX rightDriveSlave2 = new VictorSPX(4);
-	public static TalonSRX leftDriveSlave1 = new TalonSRX(10);
-	public static TalonSRX leftDriveSlave2 = new TalonSRX(11);
-	public static TalonSRX rightDriveSlave1 = new TalonSRX(3);
-	public static TalonSRX rightDriveSlave2 = new TalonSRX(4);
+	public static VictorSPX leftDriveSlave1 = new VictorSPX(10);
+	public static VictorSPX leftDriveSlave2 = new VictorSPX(11);
+	public static VictorSPX rightDriveSlave1 = new VictorSPX(3);
+	public static VictorSPX rightDriveSlave2 = new VictorSPX(4);
+//	public static TalonSRX leftDriveSlave1 = new TalonSRX(10);
+//	public static TalonSRX leftDriveSlave2 = new TalonSRX(11);
+//	public static TalonSRX rightDriveSlave1 = new TalonSRX(3);
+//	public static TalonSRX rightDriveSlave2 = new TalonSRX(4);
 	
 	
 	//setup solenoids for various robot functions
@@ -95,13 +95,13 @@ public class RobotMap {
 	
 	//setup the shooter motors speed controllers
 	
-	//public static TalonSRX leftShooter = new TalonSRX(7); 		/* device IDs here (1 of 2) */
-	//public static TalonSRX rightShooter = new TalonSRX(6);
-	public static Talon rightShooter = new Talon(1);
-	public static Talon leftShooter = new Talon(0);
+	public static TalonSRX leftShooter = new TalonSRX(7); 		/* device IDs here (1 of 2) */
+	public static TalonSRX rightShooter = new TalonSRX(6);
+	//public static Talon rightShooter = new Talon(1);
+	//public static Talon leftShooter = new Talon(0);
 
-	public static boolean leftShooterInverted = true;
-	public static boolean rightShooterInverted = false;
+	public static boolean leftShooterInverted = false;
+	public static boolean rightShooterInverted = true;
 
 	
 	//setup our lift motor 
@@ -110,7 +110,13 @@ public class RobotMap {
 	
 	public static Target autonTarget;
 	public static enum Target {
-	SWITCH, SCALE
+		SWITCH, SCALE
 	}
+	
+	public static AutoStart autonStart;
+	public static enum AutoStart {
+		LEFT, CENTER, RIGHT;
+	}
+	
 	
 }
