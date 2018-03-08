@@ -17,10 +17,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 
+import org.usfirst.frc.team5046.robot.RobotMap.Target;
+import org.usfirst.frc.team5046.robot.autongroups.CenterLeftSwitch;
 import org.usfirst.frc.team5046.robot.autongroups.DoSomething;
 import org.usfirst.frc.team5046.robot.autongroups.DriveStraightBackwards;
 import org.usfirst.frc.team5046.robot.autongroups.Turn90;
 import org.usfirst.frc.team5046.robot.autongroups.Turn90Gyro;
+import org.usfirst.frc.team5046.robot.commands.AutoTargetSelector;
 import org.usfirst.frc.team5046.robot.subsystems.Conveyor;
 import org.usfirst.frc.team5046.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5046.robot.subsystems.Intake;
@@ -52,10 +55,10 @@ public class Robot extends TimedRobot {
 
 	//setup options for choosing auto from the dashboard
 	Command autonMode;
-	SendableChooser<Command> positionChooser = new SendableChooser<Command>();
+	SendableChooser<Command> startingPositionChooser = new SendableChooser<Command>();
 	SendableChooser<Command> allianceChooser = new SendableChooser<Command>();
 	SendableChooser<Command> autonChooser = new SendableChooser<Command>();
-	
+	SendableChooser<Command> autonTarget = new SendableChooser<Command>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -123,6 +126,16 @@ public class Robot extends TimedRobot {
 		}
 		
 		SmartDashboard.putString("Robot Autonomous Data", gameData);  //puts on dashboard to make sure that we are recieving it properly
+		
+		switch (RobotMap.autonTarget) {
+			case SWITCH: {
+				System.out.println("SWITCH");
+			}
+			case SCALE: {
+				System.out.println("SCALE");
+			}
+		}
+
 		
 		// schedule the autonomous command
 		autonMode = (Command) autonChooser.getSelected();
@@ -203,20 +216,27 @@ public class Robot extends TimedRobot {
 		autonChooser.addObject("Turn 90", new Turn90());
 		autonChooser.addObject("Turn 90 Gyro", new Turn90Gyro());
 		autonChooser.addObject("DoSomething", new DoSomething());
+		autonChooser.addObject("CenterLeftSwitch", new CenterLeftSwitch());
+
 		
 		//gives you the ability to choose which position on the field that you start in
-		positionChooser.addObject("Left", null);
-		positionChooser.addDefault("Middle", null);
-		positionChooser.addObject("Right", null);
+		startingPositionChooser.addObject("Left", null);
+		startingPositionChooser.addDefault("Middle", null);
+		startingPositionChooser.addObject("Right", null);
 		
 		//lets you choose what alliance you are on(not really needed this year as the field is identical on both sides)
 		allianceChooser.addDefault("Red", null);
 		allianceChooser.addObject("Blue", null);
 		
+		//What are we trying to score in during auton
+		autonTarget.addObject("Switch", new AutoTargetSelector(Target.SWITCH));
+		autonTarget.addObject("Scale",  new AutoTargetSelector(Target.SCALE));
+		
 		//puts these values on the dashboard to make them useable
 		SmartDashboard.putData("Auton mode", autonChooser);
-		SmartDashboard.putData("Auton Position", positionChooser);
+		SmartDashboard.putData("Auton Starting Position", startingPositionChooser);
 		SmartDashboard.putData("Alliance", allianceChooser);
+		SmartDashboard.putData("Auton Target Goal", autonTarget);
 		
 		
 

@@ -37,14 +37,14 @@ public class RobotMap {
 	public static double driveF = 0.0;
 
 	//setup PIDF values for Drivetrain when turning with Gyro
-	public static double turnP = .13;
+	public static double turnP = .2;
 	public static double turnI = 0.0;
 	public static double turnD = 0.0;
 	public static double turnF = 0.0;
 	
 	
 	public static final double wheelCir = 18.84; //Set wheel circumfrence for 6in wheels
-	public static final double robotCir = 100;  //Set circumfrence of the robot
+	public static final double robotCir = 81.88;  //Set circumfrence of the robot
 
 	
 	//sets the sensor phase of the drivetrain motors
@@ -108,7 +108,9 @@ public class RobotMap {
 	public static TalonSRX liftMotor = new TalonSRX(8);
 	public static boolean liftMotorInverted = true;
 	
-
-	
+	public static Target autonTarget;
+	public static enum Target {
+	SWITCH, SCALE
+	}
 	
 }
