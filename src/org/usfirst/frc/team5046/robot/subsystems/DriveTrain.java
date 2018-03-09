@@ -7,11 +7,8 @@ import org.usfirst.frc.team5046.robot.utilities.Drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,7 +21,7 @@ public final class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
 	
-	private AHRS ahrs; //setup NavX Gyro
+	//private AHRS ahrs; //setup NavX Gyro
 
 	private Drive drive; //setup DriveTrain
 
@@ -39,11 +36,11 @@ public final class DriveTrain extends Subsystem {
 	{
 		
 		//Setup NavX using USB instead of the MXP port
-		try {
-            ahrs = new AHRS(SerialPort.Port.kUSB);
-        } catch (RuntimeException ex ) {
-            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-        }	
+//		try {
+//            ahrs = new AHRS(SerialPort.Port.kUSB);
+//        } catch (RuntimeException ex ) {
+//            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+//        }	
 		
     setFollower();  //runs code to setup the follower talons
     
@@ -286,12 +283,13 @@ public final class DriveTrain extends Subsystem {
 	
 	//gets the heading of the NavX gyro
 	public double getHeading() {
-		return ahrs.getAngle();
+//		return ahrs.getAngle();
+		return 0;
 	}
 	
 	//zeros the NavX gyro
 	public void zeroGyro() {
-		ahrs.reset();
+//		ahrs.reset();
 		
 	}
 	

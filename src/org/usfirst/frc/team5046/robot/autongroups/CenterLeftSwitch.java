@@ -1,12 +1,8 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnGyroCommand;
-import org.usfirst.frc.team5046.robot.commands.RaiseLift;
 import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
-import org.usfirst.frc.team5046.robot.commands.ShooterReverse;
 import org.usfirst.frc.team5046.robot.commands.ShooterStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

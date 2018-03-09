@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5046.robot.autoncommands;
 
 import org.usfirst.frc.team5046.robot.Robot;
-import org.usfirst.frc.team5046.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 

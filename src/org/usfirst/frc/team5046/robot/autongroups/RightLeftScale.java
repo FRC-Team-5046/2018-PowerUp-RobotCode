@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CenterLeftScale extends CommandGroup {
+public class RightLeftScale extends CommandGroup {
 
-    public CenterLeftScale() {
+    public RightLeftScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -30,14 +30,14 @@ public class CenterLeftScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    
-    	//CENTER LEFT SCALE
-    	addSequential(new AutonDriveCommand(-52,1));  //forward
-    	addSequential(new AutonTurnEncoderCommand(90,2)); 	//turn
-    	addSequential(new AutonDriveCommand(-125,2.5));  //forward
-    	addSequential(new AutonTurnEncoderCommand(-105,3));  //turn
+
+    	//RIGHT LEFT SCALE
+    	addSequential(new AutonDriveCommand(-205,4));
+    	addSequential(new AutonTurnEncoderCommand(90,2)); 	//turn left
+    	addSequential(new AutonDriveCommand(-200,4));
+    	addSequential(new AutonTurnEncoderCommand(-100,2)); 	//turn right
     	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-210,4));
+    	addSequential(new AutonDriveCommand(-35,3));
     	addSequential(new ShooterHighSpeed());
 
 

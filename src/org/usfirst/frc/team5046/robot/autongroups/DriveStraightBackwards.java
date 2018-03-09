@@ -1,13 +1,6 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
-import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnGyroCommand;
-import org.usfirst.frc.team5046.robot.commands.RaiseLift;
-import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
-import org.usfirst.frc.team5046.robot.commands.ShooterReverse;
-import org.usfirst.frc.team5046.robot.commands.ShooterStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -35,7 +28,7 @@ public class DriveStraightBackwards extends CommandGroup {
         // arm.
     	
     	//DRIVE STRAIGHT
-//    	addSequential(new AutonDriveCommand(-200,4));
+    	addSequential(new AutonDriveCommand(-200,4));
 
     	
     	//RIGHT RIGHT SWITCH
@@ -119,13 +112,13 @@ public class DriveStraightBackwards extends CommandGroup {
     	
     	
     	//LEFT RIGHT SCALE
-    	addSequential(new AutonDriveCommand(-205,4));
-    	addSequential(new AutonTurnEncoderCommand(-90,2)); 	//turn left
-    	addSequential(new AutonDriveCommand(-200,4));
-    	addSequential(new AutonTurnEncoderCommand(100,2)); 	//turn right
-    	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-25,3));
-    	addSequential(new ShooterHighSpeed());
+//    	addSequential(new AutonDriveCommand(-205,4));
+//    	addSequential(new AutonTurnEncoderCommand(-90,2)); 	//turn left
+//    	addSequential(new AutonDriveCommand(-200,4));
+//    	addSequential(new AutonTurnEncoderCommand(100,2)); 	//turn right
+//    	addParallel(new AutoRaiseLift(5));
+//    	addSequential(new AutonDriveCommand(-25,3));
+//    	addSequential(new ShooterHighSpeed());
 
 
 
