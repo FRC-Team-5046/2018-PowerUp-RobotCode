@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5046.robot.commands;
+package org.usfirst.frc.team5046.robot.autoncommands;
 
 import org.usfirst.frc.team5046.robot.Robot;
 import org.usfirst.frc.team5046.robot.RobotMap;
@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RaiseLift extends Command {
+public class AutoRaiseLift extends Command {
 
-    public RaiseLift(double seconds) {
+    public AutoRaiseLift(double seconds) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.lift);
@@ -30,7 +30,7 @@ public class RaiseLift extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut()||RobotMap.liftMotor.getSensorCollection().isFwdLimitSwitchClosed();    
+    	return isTimedOut();    
     	}
 
     // Called once after isFinished returns true

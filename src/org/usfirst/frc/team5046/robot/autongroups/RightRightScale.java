@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CenterLeftSwitch extends CommandGroup {
+public class RightRightScale extends CommandGroup {
 
-    public CenterLeftSwitch() {
+    public RightRightScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -34,19 +34,15 @@ public class CenterLeftSwitch extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
+ 
     	
-    	//CENTER LEFT SWITCH
-    	addSequential(new AutonDriveCommand(-52,2));
-    	addSequential(new AutonTurnEncoderCommand(90,1));
-    	addSequential(new AutonDriveCommand(-50,1));
-    	addSequential(new AutonTurnEncoderCommand(-90,1));
-    	addSequential(new AutonDriveCommand(-48,1));
+    	//RIGHT RIGHT SCALE
+    	addParallel(new AutoRaiseLift(5));
+    	addSequential(new AutonDriveCommand(-256,4));
+     	addSequential(new AutonTurnEncoderCommand(50,2));
+     	addSequential(new AutonDriveCommand(-21,2));
     	addSequential(new ShooterHighSpeed());
-    	addSequential(new ShooterStop());    	
-    	
-    	
-
-
+    	addSequential(new ShooterStop());
 
     	
     }

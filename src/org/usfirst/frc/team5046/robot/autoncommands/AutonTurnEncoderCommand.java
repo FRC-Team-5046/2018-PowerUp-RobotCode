@@ -24,7 +24,7 @@ public class AutonTurnEncoderCommand extends Command
 	{
 		Robot.driveTrain.zeroEncoders();
 
-		Robot.driveTrain.setPID(SmartDashboard.getNumber("driveP", RobotMap.driveP),
+		Robot.driveTrain.setPID(SmartDashboard.getNumber("turnP", RobotMap.turnP),
 				SmartDashboard.getNumber("driveI", RobotMap.driveI), 
 				SmartDashboard.getNumber("driveD", RobotMap.driveD),
 				SmartDashboard.getNumber("driveF", RobotMap.driveF));

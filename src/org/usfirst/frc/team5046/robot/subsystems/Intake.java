@@ -36,12 +36,12 @@ public class Intake extends Subsystem {
 	}
 	
 	public void armsOpen() {
-		RobotMap.solenoidIntakeArms.set(DoubleSolenoid.Value.kReverse);
+		RobotMap.solenoidIntakeArms.set(DoubleSolenoid.Value.kForward);
 		SmartDashboard.putString("Intake Arms" , "OPEN");
 	}
 	
 	public void armsClosed() {
-		RobotMap.solenoidIntakeArms.set(DoubleSolenoid.Value.kForward);
+		RobotMap.solenoidIntakeArms.set(DoubleSolenoid.Value.kReverse);
 		SmartDashboard.putString("Intake Arms" , "CLOSED");
 	}	
 	
