@@ -30,7 +30,7 @@ public class RaiseLift extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut()||RobotMap.liftMotor.getSensorCollection().isFwdLimitSwitchClosed();    
+    	return isTimedOut()||RobotMap.liftMotor.getSensorCollection().isRevLimitSwitchClosed();    
     	}
 
     // Called once after isFinished returns true

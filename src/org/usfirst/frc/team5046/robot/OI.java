@@ -59,12 +59,12 @@ public class OI {
 		one.buttonR1.whileHeld(new IntakeArmsToggle());
 		one.buttonTL.whileHeld(new ShooterHighSpeed());
 		
-		two.buttonA.whileHeld(new PickupCube());
-		two.buttonB.whileHeld(new SpitCubeOut());
+		two.buttonL1.whileHeld(new PickupCube());
+		two.buttonR1.whileHeld(new SpitCubeOut());
 		
 		two.buttonTL.whileHeld(new RaiseLift(5));
 		two.buttonTR.whileHeld(new LowerLift(5));
-		//two.buttonA.whileHeld(new ShooterHighSpeed());
+		two.buttonA.whileHeld(new ShooterHighSpeed());
 		
 		
 		

@@ -19,9 +19,11 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 
 import org.usfirst.frc.team5046.robot.RobotMap.Target;
-import org.usfirst.frc.team5046.robot.RobotMap.AutoStart;
+import org.usfirst.frc.team5046.robot.autongroups.CenterLeftSwitch;
+import org.usfirst.frc.team5046.robot.autongroups.DoSomething;
 import org.usfirst.frc.team5046.robot.autongroups.DriveStraightBackwards;
-import org.usfirst.frc.team5046.robot.commands.AutoStartPosition;
+import org.usfirst.frc.team5046.robot.autongroups.Turn90;
+import org.usfirst.frc.team5046.robot.autongroups.Turn90Gyro;
 import org.usfirst.frc.team5046.robot.commands.AutoTargetSelector;
 import org.usfirst.frc.team5046.robot.subsystems.Conveyor;
 import org.usfirst.frc.team5046.robot.subsystems.DriveTrain;
@@ -50,7 +52,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static Compressor c;
 	public static UsbCamera cameraOne;
-	//public static PowerDistributionPanel pdp;
+	public static PowerDistributionPanel pdp;
 
 	//setup options for choosing auto from the dashboard
 	Command autonMode;
@@ -69,7 +71,7 @@ public class Robot extends TimedRobot {
 		//start systems
 		oi = new OI(); 
 		c = new Compressor(RobotMap.pcm);
-		//pdp = new PowerDistributionPanel(RobotMap.pdp);
+		pdp = new PowerDistributionPanel(RobotMap.pdp);
 
 		//set motors on subsystems to proper direction so that postive is always forward
 		Robot.intake.setInverted();
@@ -101,7 +103,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		Robot.driveTrain.zeroEncoders(); //zeros encoders at the start of auton
 		Robot.driveTrain.shiftLow(); //shifts into lowgear 
-		Robot.intake.armsClosed();
+
 		
 		//reads game data from field
 		String gameData; 
@@ -126,14 +128,14 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putString("Robot Autonomous Data", gameData);  //puts on dashboard to make sure that we are recieving it properly
 		
-//		switch (RobotMap.autonTarget) {
-//			case SWITCH: {
-//				System.out.println("SWITCH");
-//			}
-//			case SCALE: {
-//				System.out.println("SCALE");
-//			}
-//		}
+		switch (RobotMap.autonTarget) {
+			case SWITCH: {
+				System.out.println("SWITCH");
+			}
+			case SCALE: {
+				System.out.println("SCALE");
+			}
+		}
 
 		
 		// schedule the autonomous command
@@ -212,12 +214,15 @@ public class Robot extends TimedRobot {
 		
 		//These are the various autonmodes that can be choosen from on the smartdashboard, each runs a auton command group
 		autonChooser.addObject("DriveStraightForward", new DriveStraightBackwards());
-
+		autonChooser.addObject("Turn 90", new Turn90());
+		autonChooser.addObject("Turn 90 Gyro", new Turn90Gyro());
+		autonChooser.addObject("DoSomething", new DoSomething());
+		autonChooser.addObject("CenterLeftSwitch", new CenterLeftSwitch());
 
 		
 		//gives you the ability to choose which position on the field that you start in
-		//startingPositionChooser.addObject("Left", new AutoStartPosition(AutoSwitch.LEFT);
-		//startingPositionChooser.addDefault("Center", new AutoStartPosition(CENTER));
+		startingPositionChooser.addObject("Left", null);
+		startingPositionChooser.addDefault("Middle", null);
 		startingPositionChooser.addObject("Right", null);
 		
 		//lets you choose what alliance you are on(not really needed this year as the field is identical on both sides)
@@ -251,7 +256,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("turnF", RobotMap.turnF);
 		
 		//puts PDP data on the dashboard so you can see if motors are running or not
-		//SmartDashboard.putData("PDP", pdp);
+		SmartDashboard.putData("PDP", pdp);
 		
 		//setup encoders and gyro with a base value of 0 on dashboard
 		SmartDashboard.putNumber("Drive Right Encoder", 0);

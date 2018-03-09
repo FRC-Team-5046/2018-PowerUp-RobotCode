@@ -272,14 +272,14 @@ public final class DriveTrain extends Subsystem {
 	
 	//set drive train shifters to low gear
 	public void shiftLow() {
-    	RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kReverse);	
+    	RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kForward);	
 		SmartDashboard.putString("Drive Train Gear" , "LOW");
 
 	}
 	
 	// set drive train shifters to high gear
 	public void shiftHigh() {
-		RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kForward);
+		RobotMap.solenoidDriveShifters.set(DoubleSolenoid.Value.kReverse);
 		SmartDashboard.putString("Drive Train Gear" , "HIGH");
 	
 	}
