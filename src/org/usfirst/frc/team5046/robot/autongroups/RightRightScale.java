@@ -35,9 +35,9 @@ public class RightRightScale extends CommandGroup {
     	
     	//RIGHT RIGHT SCALE
     	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-256,4));
+    	addSequential(new AutonDriveCommand(-256,4,false));
      	addSequential(new AutonTurnEncoderCommand(50,2));
-     	addSequential(new AutonDriveCommand(-21,2));
+     	addSequential(new AutonDriveCommand(-21,2,false));
     	addSequential(new ShooterHighSpeed());
     	addSequential(new ShooterStop());
 

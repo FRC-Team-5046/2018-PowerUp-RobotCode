@@ -33,9 +33,9 @@ public class RightRightSwitch extends CommandGroup {
 
     	
     	//RIGHT RIGHT SWITCH
-    	addSequential(new AutonDriveCommand(-150,2));
+    	addSequential(new AutonDriveCommand(-150,2,false));
     	addSequential(new AutonTurnEncoderCommand(90,2));
-    	addSequential(new AutonDriveCommand(-30,2));
+    	addSequential(new AutonDriveCommand(-30,2,false));
     	addSequential(new ShooterHighSpeed());
     	addSequential(new ShooterStop());
 

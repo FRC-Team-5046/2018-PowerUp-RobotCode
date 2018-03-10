@@ -31,11 +31,11 @@ public class CenterRightSwitch extends CommandGroup {
         // arm.
     	
     	//CENTER RIGHT SWITCH
-    	addSequential(new AutonDriveCommand(-52,2));
+    	addSequential(new AutonDriveCommand(-52,2,false));
     	addSequential(new AutonTurnEncoderCommand(-90,1));
-    	addSequential(new AutonDriveCommand(-48,1));
+    	addSequential(new AutonDriveCommand(-48,1,false));
     	addSequential(new AutonTurnEncoderCommand(90,1));
-    	addSequential(new AutonDriveCommand(-48,1));
+    	addSequential(new AutonDriveCommand(-48,1,false));
     	addSequential(new ShooterHighSpeed());
     	addSequential(new ShooterStop());    	
    	

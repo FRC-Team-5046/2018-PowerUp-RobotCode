@@ -32,12 +32,12 @@ public class LeftRightScale extends CommandGroup {
     	
     	
     	//LEFT RIGHT SCALE
-    	addSequential(new AutonDriveCommand(-205,4));
+    	addSequential(new AutonDriveCommand(-205,4,false));
     	addSequential(new AutonTurnEncoderCommand(-90,2)); 	//turn left
-    	addSequential(new AutonDriveCommand(-200,4));
+    	addSequential(new AutonDriveCommand(-200,4,false));
     	addSequential(new AutonTurnEncoderCommand(100,2)); 	//turn right
     	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-25,3));
+    	addSequential(new AutonDriveCommand(-25,3,false));
     	addSequential(new ShooterHighSpeed());
 
 

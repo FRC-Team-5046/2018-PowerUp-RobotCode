@@ -1,18 +1,18 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
 import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
+import org.usfirst.frc.team5046.robot.commands.ShooterStop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class CenterRightScale extends CommandGroup {
+public class CenterLeftSwitchHighGear extends CommandGroup {
 
-    public CenterRightScale() {
+    public CenterLeftSwitchHighGear() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -30,15 +30,17 @@ public class CenterRightScale extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//CENTER RIGHT SCALE
-     	addSequential(new AutonDriveCommand(-52,1,false));  //forward
-    	addSequential(new AutonTurnEncoderCommand(-100,2)); 	//turn right
-    	addSequential(new AutonDriveCommand(-115,2.5,false));  //forward
-    	addSequential(new AutonTurnEncoderCommand(100,3));  //turn left
-    	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-206,4,false));
+    	
+    	//CENTER LEFT SWITCH
+    	addSequential(new AutonDriveCommand(-52,2,true));
+    	addSequential(new AutonTurnEncoderCommand(90,1));
+    	addSequential(new AutonDriveCommand(-65,1,true));
+    	addSequential(new AutonTurnEncoderCommand(-90,1));
+    	addSequential(new AutonDriveCommand(-48,1,true));
     	addSequential(new ShooterHighSpeed());
-
+    	addSequential(new ShooterStop());    	
+    	
+    	
 
 
 

@@ -32,12 +32,12 @@ public class CenterLeftScale extends CommandGroup {
     	
     
     	//CENTER LEFT SCALE
-    	addSequential(new AutonDriveCommand(-52,1));  //forward
+    	addSequential(new AutonDriveCommand(-52,1,false));  //forward
     	addSequential(new AutonTurnEncoderCommand(90,2)); 	//turn
-    	addSequential(new AutonDriveCommand(-125,2.5));  //forward
+    	addSequential(new AutonDriveCommand(-125,2.5,false));  //forward
     	addSequential(new AutonTurnEncoderCommand(-105,3));  //turn
     	addParallel(new AutoRaiseLift(5));
-    	addSequential(new AutonDriveCommand(-210,4));
+    	addSequential(new AutonDriveCommand(-210,4,false));
     	addSequential(new ShooterHighSpeed());
 
 

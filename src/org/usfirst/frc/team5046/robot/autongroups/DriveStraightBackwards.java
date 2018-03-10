@@ -28,7 +28,7 @@ public class DriveStraightBackwards extends CommandGroup {
         // arm.
     	
     	//DRIVE STRAIGHT
-    	addSequential(new AutonDriveCommand(-200,4));
+    	addSequential(new AutonDriveCommand(-200,4,false));
 
     	
     	//RIGHT RIGHT SWITCH

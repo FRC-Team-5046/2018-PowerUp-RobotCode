@@ -67,7 +67,8 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> autonChooser = new SendableChooser<Command>();
 	SendableChooser<String> autonStartPosition = new SendableChooser<String>(); 
 	SendableChooser<String> autonTarget = new SendableChooser<String>();
-
+	SendableChooser<Boolean> autonSpeed = new SendableChooser<Boolean>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -121,12 +122,17 @@ public void SmartInit() {
 		autonTarget.addObject("Scale", "SCALE");
 		autonTarget.addObject("Drive Forward", "FORWARD");
 		autonTarget.addDefault("Do Nothing", "NOTHING");
+		
+		autonSpeed.addDefault("Low", false);
+		autonSpeed.addObject("High", true);
+		
 
 		
 		//puts these values on the dashboard to make them useable
 		SmartDashboard.putData("Auton mode", autonChooser);
 		SmartDashboard.putData("Auto Start", autonStartPosition);
 		SmartDashboard.putData("Auton Target", autonTarget);
+		SmartDashboard.putData("Auton Speed", autonSpeed);
 		
 		
 		System.out.println(autonStartPosition.getSelected());
