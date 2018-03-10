@@ -12,9 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutonDriveCommand extends Command
 {
 	private double inches;
-	private boolean highgear;
 
-	public AutonDriveCommand(double inches, double seconds,boolean highgear)
+	public AutonDriveCommand(double inches, double seconds,boolean speed)
 	{
 		requires(Robot.driveTrain);
 
@@ -24,9 +23,7 @@ public class AutonDriveCommand extends Command
 		
 		Robot.driveTrain.zeroEncoders();
 		
-		this.highgear = highgear;
-		
-		if (highgear = true) {
+		if (speed = true) {
 			Robot.driveTrain.shiftHigh();
 			
 		}else

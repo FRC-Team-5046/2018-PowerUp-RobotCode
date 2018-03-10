@@ -21,8 +21,10 @@ import edu.wpi.first.wpilibj.Compressor;
 //import org.usfirst.frc.team5046.robot.RobotMap.Target;
 import org.usfirst.frc.team5046.robot.autongroups.CenterLeftScale;
 import org.usfirst.frc.team5046.robot.autongroups.CenterLeftSwitch;
+import org.usfirst.frc.team5046.robot.autongroups.CenterLeftSwitchHighGear;
 import org.usfirst.frc.team5046.robot.autongroups.CenterRightScale;
 import org.usfirst.frc.team5046.robot.autongroups.CenterRightSwitch;
+import org.usfirst.frc.team5046.robot.autongroups.CenterRightSwitchHighGear;
 import org.usfirst.frc.team5046.robot.autongroups.DoNothing;
 import org.usfirst.frc.team5046.robot.autongroups.DriveStraightBackwards;
 import org.usfirst.frc.team5046.robot.autongroups.LeftLeftScale;
@@ -106,13 +108,6 @@ public class Robot extends TimedRobot {
 
 public void SmartInit() {
 		
-		//These are the various autonmodes that can be choosen from on the smartdashboard, each runs a auton command group
-//		autonChooser.addObject("DriveStraightForward", new DriveStraightBackwards());
-//		autonChooser.addObject("CenterLeftScale", new CenterLeftScale());
-//		autonChooser.addObject("CenterLeftSwitch", new CenterLeftSwitch());
-//		autonChooser.addObject("CenterRightScale", new CenterRightScale());
-//		autonChooser.addObject("CenterRightSwitch", new CenterRightSwitch());
-//		autonChooser.addObject("LeftLeftSwitch", new LeftLeftSwitch());
 	
 		autonStartPosition.addObject("Left", "LEFT");
 		autonStartPosition.addObject("Right", "RIGHT");
@@ -135,8 +130,9 @@ public void SmartInit() {
 		SmartDashboard.putData("Auton Speed", autonSpeed);
 		
 		
-		System.out.println(autonStartPosition.getSelected());
-		System.out.println(autonTarget.getSelected());
+		System.out.println("Starting Position: " + autonStartPosition.getSelected());
+		System.out.println("Target: " + autonTarget.getSelected());
+		System.out.println("Speed: " + autonSpeed.getSelected());
 		
 		//System.out.println("Settings"); 
 		
@@ -191,48 +187,7 @@ public void SmartInit() {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		SmartDashboard.putString("Robot Autonomous Data", gameData);  //puts on dashboard to make sure that we are recieving it properly
 		
-//		if (gameData.charAt(0) == 'L')
-//		{
-//			System.out.println("left auton");
-//			autonMode = new CenterLeftSwitch();
-//
-//			// Put left auto code here
-//		}
-//		else
-//		{
-//			System.out.println("right auton");
-//			autonMode = new CenterRightSwitch();
-//			// Put right auto code here
-//		}
-//		
-//		System.out.println(autonStartingPosition.getSelected());
-//		System.out.println("IfStatement:");
-//		if (autonStartingPosition.getSelected().toString() ==  "LEFT")
-//		{
-//			System.out.println("LEFT");
-//		} 
-//		else if (autonStartingPosition.getSelected().toString() ==  "RIGHT")
-//		{
-//			System.out.println("RIGHT");
-//		}
-//		else if (autonStartingPosition.getSelected().toString() ==  "CENTER")
-//		{
-//			System.out.println("CENTER");
-//		} 
-//		
-//		
-//		if (autonTarget.getSelected().toString() == "FORWARD")
-//		{
-//			System.out.println("FORWARD");
-//		} 
-//		else if (autonTarget.getSelected().toString() == "SCALE")
-//		{
-//		System.out.println("SCALE");
-//		}
-//		else if (autonTarget.getSelected().toString() == "SWITCH")
-//		{
-//		System.out.println("SWITCH");
-//		}
+
 		
 	if (autonTarget.getSelected().toString() == "NOTHING")
 	{
@@ -293,9 +248,9 @@ public void SmartInit() {
 				if (gameData.charAt(1) == 'L')
 				{
 					System.out.println("CENTERLEFTSCALE");
-					autonMode = new CenterLeftScale();
+						autonMode = new CenterLeftScale();
 
-				}
+				}	
 				else
 				{
 					System.out.println("CENTERRIGHTSCALE");
@@ -353,14 +308,27 @@ public void SmartInit() {
 				if (gameData.charAt(0) == 'L')
 				{
 					System.out.println("CENTERLEFTSWITCH");
+					if(autonSpeed.getSelected().booleanValue() == true) {
+						System.out.println("CENTERLEFTSWITCH FAST");
+						autonMode = new CenterLeftSwitchHighGear();
+					}
+					else
+					{
+					
 					autonMode = new CenterLeftSwitch();
-
+					}
 				}
 				else
 				{
 					System.out.println("CENTERRIGHTSWITCH");
+					if (autonSpeed.getSelected().booleanValue() == true) {
+						System.out.println("CENTERRIGHTSWITCH FAST");
+						autonMode = new CenterRightSwitchHighGear();
+					}
+					else
+					{
 					autonMode = new CenterRightSwitch();
-					// Put right auto code here
+					}
 				}
 
 			} 
@@ -435,6 +403,8 @@ public void SmartInit() {
 
 		Scheduler.getInstance().run();  //runs scheduler loop
 	}
+	
+	
 
 	/**
 	 * This function is called periodically during test mode.

@@ -107,15 +107,5 @@ public class RobotMap {
 	public static TalonSRX liftMotor = new TalonSRX(8);
 	public static boolean liftMotorInverted = true;
 	
-	public static Target autonTarget;
-	public static enum Target {
-		SWITCH, SCALE
-	}
-	
-	public static AutoStart autonStart;
-	public static enum AutoStart {
-		LEFT, CENTER, RIGHT;
-	}
-	
 	
 }
