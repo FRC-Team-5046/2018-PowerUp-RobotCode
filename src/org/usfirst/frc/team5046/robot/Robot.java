@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 
 //import org.usfirst.frc.team5046.robot.RobotMap.Target;
@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 	//setup default systems
 	public static OI oi;
 	public static Compressor c;
-	public static UsbCamera cameraOne;
+	//public static UsbCamera cameraOne;
 	//public static PowerDistributionPanel pdp;
 
 	//setup options for choosing auto from the dashboard
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
 
 		//initialize the dashboard with values
 		SmartInit();
-		CameraServer.getInstance().startAutomaticCapture();
+//		CameraServer.getInstance().startAutomaticCapture();
 				
 	}
 
