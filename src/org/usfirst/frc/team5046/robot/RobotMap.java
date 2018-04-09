@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -106,6 +107,14 @@ public class RobotMap {
 	//setup our lift motor 
 	public static TalonSRX liftMotor = new TalonSRX(8);
 	public static boolean liftMotorInverted = true;
+	
+	//led light driver
+	public static Spark ledController = new Spark(0);
+	
+	public static double ledValue = 0.99;
+	
+	public static int matchEndWarning = 30;
+	public static int matchEndClose = 10;
 	
 	
 }

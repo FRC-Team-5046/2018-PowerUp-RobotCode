@@ -38,6 +38,7 @@ import org.usfirst.frc.team5046.robot.autongroups.RightRightSwitch;
 import org.usfirst.frc.team5046.robot.subsystems.Conveyor;
 import org.usfirst.frc.team5046.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5046.robot.subsystems.Intake;
+import org.usfirst.frc.team5046.robot.subsystems.LEDs;
 import org.usfirst.frc.team5046.robot.subsystems.Lift;
 import org.usfirst.frc.team5046.robot.subsystems.Shooter;
 
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
 	public static Conveyor conveyor = new Conveyor();
 	public static Intake intake = new Intake();
 	public static Shooter shooter = new Shooter();
+	public static LEDs leds = new LEDs();
 	
 	//setup default systems
 	public static OI oi;
@@ -70,7 +72,11 @@ public class Robot extends TimedRobot {
 	SendableChooser<String> autonStartPosition = new SendableChooser<String>(); 
 	SendableChooser<String> autonTarget = new SendableChooser<String>();
 	SendableChooser<Boolean> autonSpeed = new SendableChooser<Boolean>();
-	
+
+	DriverStation.Alliance allianceColor;
+	double matchTime;
+
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -165,7 +171,8 @@ public void SmartInit() {
 		SmartDashboard.putNumber("Right Conveyer Motor", 0);	
 
     	SmartDashboard.putString("Upper Stage" , "BEGIN");
-
+    	
+    	SmartDashboard.putNumber("LEDvalue", RobotMap.ledValue);
 		
 		SmartDashboard.putData(Scheduler.getInstance());  //shows what is scheduled to run
 
@@ -175,12 +182,23 @@ public void SmartInit() {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();//runs scheduler loop
 		
+		allianceColor = DriverStation.getInstance().getAlliance();
+		if(allianceColor == DriverStation.Alliance.Blue){
+			Robot.leds.solidBlue();
+		} else
+		if (allianceColor == DriverStation.Alliance.Red) {
+			Robot.leds.solidRed();
+		}
+		
 	}
 
 	public void autonomousInit() {
 		Robot.driveTrain.zeroEncoders(); //zeros encoders at the start of auton
 		Robot.driveTrain.shiftLow(); //shifts into lowgear 
 		Robot.intake.armsClosed();
+		
+
+		
 		
 		//reads game data from field
 		String gameData; 
@@ -369,6 +387,7 @@ public void SmartInit() {
 	public void teleopInit() {
 		
 		
+		
 		Robot.driveTrain.zeroEncoders(); //zero's encoders as we start telop
 		Robot.driveTrain.shiftLow(); //shifts the drive train into low
 		Robot.intake.armsOpen(); //opens the arms if they were not already opened in auton mode
@@ -399,6 +418,22 @@ public void SmartInit() {
 		Robot.lift.updateLift();
 
 		
+		matchTime = DriverStation.getInstance().getMatchTime();
+		System.out.println(matchTime);
+		
+		if (matchTime < RobotMap.matchEndWarning && matchTime > RobotMap.matchEndClose && allianceColor == DriverStation.Alliance.Blue){
+			Robot.leds.heartbeatBlue();
+		}
+		else if (matchTime < RobotMap.matchEndWarning && matchTime > RobotMap.matchEndClose && allianceColor == DriverStation.Alliance.Red){
+			Robot.leds.heartbeatRed();
+		}
+		else if (matchTime < RobotMap.matchEndClose && allianceColor == DriverStation.Alliance.Blue){
+			Robot.leds.strobeBlue();
+		}
+		else if (matchTime < RobotMap.matchEndClose && allianceColor == DriverStation.Alliance.Red){
+			Robot.leds.strobeRed();
+		}
+			
 
 
 		Scheduler.getInstance().run();  //runs scheduler loop
@@ -411,6 +446,9 @@ public void SmartInit() {
 	 */
 	
 	public void testPeriodic() {
+		Robot.leds.manual(SmartDashboard.getNumber("LEDvalue", 0.99));
 	}
 
+	
+	
 	}
