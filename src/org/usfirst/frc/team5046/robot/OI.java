@@ -10,7 +10,10 @@ package org.usfirst.frc.team5046.robot;
 import org.usfirst.frc.team5046.robot.RobotMap;
 import org.usfirst.frc.team5046.robot.commandgroups.PickupCube;
 import org.usfirst.frc.team5046.robot.commandgroups.SpitCubeOut;
+import org.usfirst.frc.team5046.robot.commands.Climb;
 import org.usfirst.frc.team5046.robot.commands.DriveShiftToggle;
+import org.usfirst.frc.team5046.robot.commands.HookDown;
+import org.usfirst.frc.team5046.robot.commands.HookUp;
 import org.usfirst.frc.team5046.robot.commands.IntakeArmsToggle;
 import org.usfirst.frc.team5046.robot.commands.LowerLift;
 import org.usfirst.frc.team5046.robot.commands.RaiseLift;
@@ -56,7 +59,7 @@ public class OI {
 	public OI()
 	{
 		one.buttonL1.toggleWhenPressed(new DriveShiftToggle());
-		one.buttonR1.whileHeld(new IntakeArmsToggle());
+		one.buttonR1.toggleWhenPressed(new IntakeArmsToggle());
 		one.buttonTL.whileHeld(new ShooterHighSpeed());
 		
 		two.buttonA.whileHeld(new PickupCube());
@@ -66,6 +69,9 @@ public class OI {
 		two.buttonTR.whileHeld(new LowerLift(5));
 		//two.buttonA.whileHeld(new ShooterHighSpeed());
 		
+		two.buttonL1.whileHeld(new HookUp());
+		two.buttonR1.whileHeld(new HookDown());
+		two.buttonY.whileHeld(new Climb());
 		
 		
 		

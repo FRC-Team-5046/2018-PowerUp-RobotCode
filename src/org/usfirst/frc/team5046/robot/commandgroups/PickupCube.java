@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5046.robot.commandgroups;
 
 import org.usfirst.frc.team5046.robot.commands.ConveyorHighSpeed;
+import org.usfirst.frc.team5046.robot.commands.IntakeSuckCubeIn;
 import org.usfirst.frc.team5046.robot.commands.ShooterLowSpeed;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -31,5 +32,7 @@ public class PickupCube extends CommandGroup {
     	 
     	addParallel(new ShooterLowSpeed());
     	addParallel(new ConveyorHighSpeed());
+    	addParallel(new IntakeSuckCubeIn());
+
     	}
 }

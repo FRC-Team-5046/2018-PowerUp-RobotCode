@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5046.robot.commandgroups;
 
 import org.usfirst.frc.team5046.robot.commands.ConveyorReverse;
+import org.usfirst.frc.team5046.robot.commands.IntakeSpitCubeOut;
 import org.usfirst.frc.team5046.robot.commands.ShooterReverse;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -31,5 +32,6 @@ public class SpitCubeOut extends CommandGroup {
     	 
     	addParallel(new ShooterReverse());
     	addParallel(new ConveyorReverse());
+		addParallel(new IntakeSpitCubeOut());
     	}
 }

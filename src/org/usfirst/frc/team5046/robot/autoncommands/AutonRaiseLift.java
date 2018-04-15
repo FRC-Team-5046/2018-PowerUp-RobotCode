@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoRaiseLift extends Command {
+public class AutonRaiseLift extends Command {
 
-    public AutoRaiseLift(double seconds) {
+    public AutonRaiseLift(double seconds) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.lift);

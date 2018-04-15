@@ -10,7 +10,6 @@ package org.usfirst.frc.team5046.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 
@@ -42,9 +41,18 @@ public class RobotMap {
 	public static double turnD = 0.0;
 	public static double turnF = 0.0;
 	
+	//setup PIDF values for Lift
+	public static double liftP = .1;
+	public static double liftI = 0.0;
+	public static double liftD = 0.0;
+	public static double liftF = 0.0;
+	
 	
 	public static final double wheelCir = 18.84; //Set wheel circumfrence for 6in wheels
 	public static final double robotCir = 100;  //Set circumfrence of the robot
+	
+	
+	public static final double liftPullyDiameter = 2;
 
 	
 	//sets the sensor phase of the drivetrain motors
@@ -115,6 +123,12 @@ public class RobotMap {
 	
 	public static int matchEndWarning = 30;
 	public static int matchEndClose = 10;
+	
+	//public static DigitalInput rearCubeSensor = new DigitalInput(1);
+	
+	public static Spark raiseHook = new Spark(2);
+	
+	public static Spark winch = new Spark(1);
 	
 	
 }

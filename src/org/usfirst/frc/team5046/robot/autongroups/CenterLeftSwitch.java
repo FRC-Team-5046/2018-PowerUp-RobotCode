@@ -36,7 +36,7 @@ public class CenterLeftSwitch extends CommandGroup {
     	addSequential(new AutonTurnEncoderCommand(90,1));
     	addSequential(new AutonDriveCommand(-65,1,false));
     	addSequential(new AutonTurnEncoderCommand(-90,1));
-    	addSequential(new AutonDriveCommand(-48,1,false));
+    	addSequential(new AutonDriveCommand(-60,1,false));
     	addSequential(new ShooterHighSpeed());
     	addSequential(new ShooterStop());    	
     	

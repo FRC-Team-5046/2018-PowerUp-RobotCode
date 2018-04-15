@@ -1,7 +1,8 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
+import org.usfirst.frc.team5046.robot.autoncommands.AutonRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
+import org.usfirst.frc.team5046.robot.autoncommands.AutonRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
 import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
 
@@ -36,7 +37,7 @@ public class CenterLeftScale extends CommandGroup {
     	addSequential(new AutonTurnEncoderCommand(90,2)); 	//turn
     	addSequential(new AutonDriveCommand(-125,2.5,false));  //forward
     	addSequential(new AutonTurnEncoderCommand(-105,3));  //turn
-    	addParallel(new AutoRaiseLift(5));
+    	addParallel(new AutonRaiseLift(5));
     	addSequential(new AutonDriveCommand(-210,4,false));
     	addSequential(new ShooterHighSpeed());
 

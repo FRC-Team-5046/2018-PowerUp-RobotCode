@@ -35,6 +35,7 @@ import org.usfirst.frc.team5046.robot.autongroups.RightLeftScale;
 import org.usfirst.frc.team5046.robot.autongroups.RightLeftSwitch;
 import org.usfirst.frc.team5046.robot.autongroups.RightRightScale;
 import org.usfirst.frc.team5046.robot.autongroups.RightRightSwitch;
+import org.usfirst.frc.team5046.robot.subsystems.Climber;
 import org.usfirst.frc.team5046.robot.subsystems.Conveyor;
 import org.usfirst.frc.team5046.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5046.robot.subsystems.Intake;
@@ -59,6 +60,7 @@ public class Robot extends TimedRobot {
 	public static Intake intake = new Intake();
 	public static Shooter shooter = new Shooter();
 	public static LEDs leds = new LEDs();
+	public static Climber climber = new Climber();
 	
 	//setup default systems
 	public static OI oi;
@@ -154,6 +156,12 @@ public void SmartInit() {
 		SmartDashboard.putNumber("turnD", RobotMap.turnD);
 		SmartDashboard.putNumber("turnF", RobotMap.turnF);
 		
+		//puts the lift PID values on the dashboard
+		SmartDashboard.putNumber("liftP", RobotMap.liftP);
+		SmartDashboard.putNumber("liftI", RobotMap.liftI);
+		SmartDashboard.putNumber("liftD", RobotMap.liftD);
+		SmartDashboard.putNumber("liftF", RobotMap.liftF);
+		
 		//puts PDP data on the dashboard so you can see if motors are running or not
 		//SmartDashboard.putData("PDP", pdp);
 		
@@ -173,6 +181,8 @@ public void SmartInit() {
     	SmartDashboard.putString("Upper Stage" , "BEGIN");
     	
     	SmartDashboard.putNumber("LEDvalue", RobotMap.ledValue);
+    	
+    	SmartDashboard.putBoolean("Rear Cube Sensor", false);
 		
 		SmartDashboard.putData(Scheduler.getInstance());  //shows what is scheduled to run
 
@@ -416,7 +426,8 @@ public void SmartInit() {
 		Robot.conveyor.updateConveyerRunning();
 		Robot.shooter.updateShooterRunning();
 		Robot.lift.updateLift();
-
+//		Robot.conveyor.readRearCubeSensor();
+		
 		
 		matchTime = DriverStation.getInstance().getMatchTime();
 		System.out.println(matchTime);

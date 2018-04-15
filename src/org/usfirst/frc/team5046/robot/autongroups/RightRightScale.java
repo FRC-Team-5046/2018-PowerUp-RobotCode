@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5046.robot.autongroups;
 
-import org.usfirst.frc.team5046.robot.autoncommands.AutoRaiseLift;
+import org.usfirst.frc.team5046.robot.autoncommands.AutonRaiseLift;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonDriveCommand;
 import org.usfirst.frc.team5046.robot.autoncommands.AutonTurnEncoderCommand;
 import org.usfirst.frc.team5046.robot.commands.ShooterHighSpeed;
@@ -34,7 +34,7 @@ public class RightRightScale extends CommandGroup {
  
     	
     	//RIGHT RIGHT SCALE
-    	addParallel(new AutoRaiseLift(5));
+    	addParallel(new AutonRaiseLift(5));
     	addSequential(new AutonDriveCommand(-256,4,false));
      	addSequential(new AutonTurnEncoderCommand(50,2));
      	addSequential(new AutonDriveCommand(-21,2,false));

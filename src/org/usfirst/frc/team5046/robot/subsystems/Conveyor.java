@@ -31,6 +31,12 @@ public class Conveyor extends Subsystem {
 		RobotMap.rightConveyer.setInverted(RobotMap.rightConveyerInverted);
 
 	}
+	
+//	public boolean readRearCubeSensor() {
+//		SmartDashboard.putBoolean("Rear Cube Sensor", RobotMap.rearCubeSensor.get());
+//		return RobotMap.rearCubeSensor.get(); 
+//
+//	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

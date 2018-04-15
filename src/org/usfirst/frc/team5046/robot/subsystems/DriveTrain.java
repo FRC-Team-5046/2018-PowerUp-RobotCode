@@ -140,6 +140,16 @@ public final class DriveTrain extends Subsystem {
 	   	RobotMap.rightDriveSlave2.setInverted(RobotMap.rightDriveInverted);
 	  
 	}
+	
+	public void setRamping() {
+		RobotMap.leftDriveMaster.configOpenloopRamp(0, 10);
+		RobotMap.leftDriveSlave1.configOpenloopRamp(0, 10);
+		RobotMap.leftDriveSlave2.configOpenloopRamp(0, 10);
+		
+		RobotMap.rightDriveMaster.configOpenloopRamp(0, 10);
+		RobotMap.rightDriveSlave1.configOpenloopRamp(0, 10);
+		RobotMap.rightDriveSlave2.configOpenloopRamp(0, 10);
+	}
 
 	//Setup the sensor phase of the encoders
 	public void setSensorPhase(boolean leftphase, boolean rightphase)
